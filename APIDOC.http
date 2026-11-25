@@ -1,0 +1,156 @@
+
+#api call for create student account
+###
+POST http://127.0.0.1:8000/accounts/student/register/
+Content-Type: application/json
+
+{
+    "username":"student2",
+    "password":"password@123",
+    "email":"student2@gmail.com",
+    "phone":"8768656424"
+}
+
+
+#api call for create trainer account
+###
+POST http://127.0.0.1:8000/accounts/trainer/register/
+Content-Type: application/json
+
+{
+    "username":"trainer3",
+    "password":"password@123",
+    "email":"trainer3@gmail.com",
+    "phone":"9207066221"
+}
+#trainer1 password@123
+#trainer2 password@123
+
+
+#api call for complete trainer profile
+###
+PUT http://127.0.0.1:8000/accounts/trainer/profile/
+Content-Type: application/json
+Authorization: Basic trainer3:password@123
+
+{
+    "user": 5,
+    "qualification": "M.Tech Computer Science",
+    "specialization": "Python Full Stack Development",
+    "experience": "5 years"
+}
+
+#api call for retrieve trainer profile
+###
+GET  http://127.0.0.1:8000/accounts/profile/me/
+Accept: application/json
+Authorization: Basic trainer1:password@123
+
+
+#api call for token
+###
+POST http://127.0.0.1:8000/accounts/token/
+Content-Type: application/json
+
+{
+    "username":"trainer3",
+    "password":"password@123"
+}
+#trainer1 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+#trainer2 a3fa889c00f345a80841c63f727c8988a6f5b4fa
+#trainer3 6bdef14e84b4877bec3aa79116cff82d56fb4f43
+
+# ===============course endpoints===========================
+#api call for add course
+###
+POST http://127.0.0.1:8000/courses/create/
+Content-Type: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+{
+    "title": "Python Full Stack Development advance",
+    "short_description": "Learn Python and Django from basics",
+    "detailed_description": "A complete course covering Python, Django, Django REST Framework, HTML, CSS and MySQL.",
+    "duration": 6,
+    "level": "beginner",
+    "status": "published"
+}
+
+
+#api call for list all  course
+###
+GET http://127.0.0.1:8000/courses/all/
+Accept: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+
+#api call for list specific  course
+###
+GET http://127.0.0.1:8000/courses/2/
+Accept: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+#api call for update course
+###
+PUT http://127.0.0.1:8000/courses/update/2/
+Content-Type: application/json
+Authorization: Token a3fa889c00f345a80841c63f727c8988a6f5b4fa
+
+{
+  "id": 2,
+  "title": "Java Programming",
+  "short_description": "Learn Java programming from basics",
+  "detailed_description": "Learn Java fundamentals, OOP concepts, exception handling, collections and basic application development..",
+  "duration": 5,
+  "level": "beginner",
+  "status": "published",
+  "created_at": "2026-11-22T19:35:22.637306Z",
+  "updated_at": "2026-11-22T19:35:22.637342Z",
+  "trainer": 3
+}
+
+#api call for delete course
+###
+DELETE http://127.0.0.1:8000/courses/delete/3/
+Accept: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+#===========module endpoints====================
+#api call for create module
+###
+POST http://127.0.0.1:8000/modules/course/1/module/
+Content-Type: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+{
+    "title": "Object-Oriented Programming in Python",
+    "description": "Topics include classes, objects, constructors, the __init__() method, instance variables, methods, inheritance, polymorphism, encapsulation, and abstraction. Students will practise creating classes and objects and implementing OOP concepts through practical Python programs."
+}
+
+#api call for retrieve module
+###
+GET http://127.0.0.1:8000/modules/1/
+Accept: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+#api call for update module
+###
+PUT http://127.0.0.1:8000/modules/update/1/
+Content-Type: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0
+
+{
+  "id": 1,
+  "title": "Introduction to Python",
+  "description": "Python installation, variables, data types, operators, conditional statements, loops, and basic input and output operations. By the end of this module, students will understand the basic concepts of Python and be able to write simple Python programs.",
+  "module_number": 1,
+  "created_at": "2026-11-25T05:33:33.744330Z",
+  "updated_at": "2026-11-25T05:33:33.744382Z",
+  "course": 1
+}
+
+#api call for delete module
+###
+DELETE http://127.0.0.1:8000/modules/delete/4/
+Accept: application/json
+Authorization: Token 79a65133a8a1a69cd95389a3f641047a41ccd7b0

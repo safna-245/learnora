@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from django.db.models.signals import post_save
+from django.core.mail import send_mail
+
 
 
 
@@ -13,7 +15,6 @@ class User(AbstractUser):
 
     ROLE_CHOICES = (
         ("student","student"),
-        ("admin","admin"),
         ("trainer","trainer")
     )
 
@@ -61,3 +62,17 @@ def create_trainer_profile(sender,instance,created,*args,**kwargs):
         TrainerProfile.objects.create(user=instance)
 
 post_save.connect(create_trainer_profile,sender=User)
+
+
+def send_invitation_mail(sender,instance,created,*args,**kwargs):
+
+    if created and instance.role=="trainer":
+
+        send_mail(
+            "Account Creation Confirmation",
+            "you have successfully created account in learnora application",
+            "safnaaboobacker05@gmail.com",
+            ["hwaajinaaa@gmail.com"],
+        )
+
+post_save.connect(send_invitation_mail,sender=User)
